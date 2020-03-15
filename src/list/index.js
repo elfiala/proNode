@@ -14,9 +14,25 @@ app.get("/list/:status/:page", async (req, res) => {
 });
 /**创建一个todo */
 app.post("/create", async (req, res, next) => {
-  let { name, deadline, content } = req.body;
+  let { name, deadline, content } = req.body; //需要引入body-parser
   res.json({
-    todo: { name }
+    todo: { name, deadline, content }
+  });
+});
+/**修改一个todo */
+app.post("/update", async (req, res, next) => {
+  let { name, deadline, content, id } = req.body;
+  res.json({
+    todo: { name, deadline, content, id }
+  });
+});
+/**修改一个todo,删除 */
+app.post("/update_status", async (req, res, next) => {
+  let { id, status } = res.body;
+  res.json({
+    todo: {},
+    id,
+    status
   });
 });
 function error_handle(err, req, res, next) {
